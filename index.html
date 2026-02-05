@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laptop Finder AI</title>
+    
+    <title>Laptop Finder India - Best Laptop Under 50000</title>
+    <meta name="description" content="Find the best laptop for coding, gaming, or college in India. Simple AI tool to choose the right laptop under ₹40k, ₹60k or ₹90k.">
+    <meta name="keywords" content="laptop finder, best laptop under 50000, best gaming laptop india, coding laptop guide 2026">
+    
+    <meta property="og:title" content="💻 Laptop Finder AI: Find your perfect laptop in 3 clicks">
+    <meta property="og:description" content="Don't be confused by specs. Use this tool to check if a laptop can run GTA V or VS Code instantly.">
+    <meta property="og:type" content="website">
+
     <style>
         :root {
             --primary: #2563eb;
@@ -34,7 +42,7 @@
         h1 { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
         p.subtitle { color: #64748b; font-size: 1.1rem; margin-bottom: 40px; }
 
-        /* Question Cards */
+        /* Animation */
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.4s ease; }
 
@@ -128,13 +136,13 @@
     <div class="container">
         
         <div id="step-0" class="step active">
-            <h1>💻 Laptop Finder</h1>
-            <p class="subtitle">Answer 3 simple questions to find the perfect laptop for your needs. No tech jargon.</p>
+            <h1>💻 Laptop Finder AI</h1>
+            <p class="subtitle">Answer 3 simple questions to find the perfect laptop. No tech jargon.</p>
             <button class="option-btn" onclick="nextStep(1)" style="width:100%; background:var(--primary); color:white; border:none;">Start Quiz</button>
         </div>
 
         <div id="step-1" class="step">
-            <h2>What will you use it for?</h2>
+            <h2>Primary Use?</h2>
             <div class="option-grid">
                 <button class="option-btn" onclick="selectUsage('basic')">📚 College / Office</button>
                 <button class="option-btn" onclick="selectUsage('coding')">👨‍💻 Coding / Dev</button>
@@ -144,7 +152,7 @@
         </div>
 
         <div id="step-2" class="step">
-            <h2>What is your budget?</h2>
+            <h2>Your Budget?</h2>
             <div class="option-grid">
                 <button class="option-btn" onclick="selectBudget('low')">Under ₹40k</button>
                 <button class="option-btn" onclick="selectBudget('mid')">₹40k - ₹60k</button>
@@ -154,7 +162,7 @@
         </div>
 
         <div id="step-result" class="step">
-            <p class="subtitle">✨ Based on your answers, here is the best match:</p>
+            <p class="subtitle">✨ Based on your budget & usage, we recommend:</p>
             
             <div class="result-card">
                 <div class="laptop-name" id="res-name">Loading...</div>
@@ -173,6 +181,7 @@
                 </div>
 
                 <a href="#" target="_blank" class="buy-btn" id="res-link">Check Price on Amazon ↗</a>
+                
                 <div class="reset-link" onclick="location.reload()">Start Over</div>
             </div>
         </div>
@@ -182,35 +191,46 @@
     <script>
         let userChoices = { usage: '', budget: '' };
 
-        // --- THE DATABASE (Add more laptops here) ---
+        // --- DATABASE: Edit links here to earn money ---
         const laptops = [
             // LOW BUDGET (<40k)
             { id: 'l1', name: 'Honor MagicBook X14', price: '₹37,990', budget: 'low', usage: ['basic', 'coding'], 
               specs: 'i3 12th Gen | 8GB RAM | 512GB SSD', 
-              checks: ['❌ GTA V (Laggy)', '✅ VS Code', '❌ 4K Edit', '✅ Battery 9hr+'], link: 'https://amazon.in/...' },
+              checks: ['❌ GTA V (Laggy)', '✅ VS Code', '❌ 4K Edit', '✅ Battery 9hr+'], 
+              link: 'https://www.amazon.in/s?k=Honor+Magicbook+X14' }, // PASTE YOUR AFFILIATE LINK HERE
             
             // MID BUDGET (40-60k) - GAMING
             { id: 'l2', name: 'HP Victus Gaming', price: '₹56,990', budget: 'mid', usage: ['gaming', 'creative'], 
               specs: 'Ryzen 5 5600H | RTX 3050 | 16GB RAM', 
-              checks: ['✅ GTA V (High)', '✅ VS Code', '✅ 1080p Edit', '❌ Battery 3hr'], link: 'https://amazon.in/...' },
+              checks: ['✅ GTA V (High)', '✅ VS Code', '✅ 1080p Edit', '❌ Battery 3hr'], 
+              link: 'https://www.amazon.in/s?k=HP+Victus+Gaming' }, // PASTE YOUR AFFILIATE LINK HERE
 
             // MID BUDGET (40-60k) - WORK
             { id: 'l3', name: 'ASUS Vivobook 16X', price: '₹48,990', budget: 'mid', usage: ['basic', 'coding'], 
               specs: 'Ryzen 7 5800H | 16GB RAM | 512GB SSD', 
-              checks: ['✅ GTA V (Low)', '✅ VS Code', '⚠️ 1080p Edit', '✅ Battery 7hr'], link: 'https://amazon.in/...' },
+              checks: ['✅ GTA V (Low)', '✅ VS Code', '⚠️ 1080p Edit', '✅ Battery 7hr'], 
+              link: 'https://www.amazon.in/s?k=Asus+Vivobook+16X' }, // PASTE YOUR AFFILIATE LINK HERE
 
             // HIGH BUDGET (60-90k)
             { id: 'l4', name: 'MacBook Air M1', price: '₹69,990', budget: 'high', usage: ['coding', 'creative', 'basic'], 
               specs: 'M1 Chip | 8GB Unified | 256GB SSD', 
-              checks: ['❌ GTA V', '✅ VS Code (Fast)', '✅ 4K Edit', '✅ Battery 15hr+'], link: 'https://amazon.in/...' },
+              checks: ['❌ GTA V', '✅ VS Code (Fast)', '✅ 4K Edit', '✅ Battery 15hr+'], 
+              link: 'https://www.amazon.in/s?k=Apple+Macbook+Air+M1' }, // PASTE YOUR AFFILIATE LINK HERE
 
             // ULTRA BUDGET (90k+)
             { id: 'l5', name: 'Lenovo Legion 5 Pro', price: '₹1,10,000', budget: 'ultra', usage: ['gaming', 'creative', 'coding', 'basic'], 
               specs: 'i7 13th Gen | RTX 4060 | 1TB SSD', 
-              checks: ['✅ GTA V (Ultra)', '✅ VS Code', '✅ 4K Edit', '❌ Battery 4hr'], link: 'https://amazon.in/...' }
+              checks: ['✅ GTA V (Ultra)', '✅ VS Code', '✅ 4K Edit', '❌ Battery 4hr'], 
+              link: 'https://www.amazon.in/s?k=Lenovo+Legion+5+Pro' }, // PASTE YOUR AFFILIATE LINK HERE
+
+            // FALLBACKS (To ensure a result always shows)
+            { id: 'fallback', name: 'Acer Aspire 5', price: '₹42,990', budget: 'mid', usage: [],
+              specs: 'i5 12th Gen | 16GB RAM | 512GB SSD',
+              checks: ['❌ GTA V', '✅ VS Code', '⚠️ 1080p Edit', '✅ Battery 6hr'],
+              link: 'https://www.amazon.in/s?k=Acer+Aspire+5' }
         ];
 
-        // --- NAVIGATION LOGIC ---
+        // --- LOGIC ---
         function nextStep(n) {
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             document.getElementById('step-' + n).classList.add('active');
@@ -226,14 +246,18 @@
             findResult();
         }
 
-        // --- FIND MATCH LOGIC ---
         function findResult() {
-            // Filter laptops that match BOTH budget and usage
+            // 1. Try to find exact match
             let match = laptops.find(l => l.budget === userChoices.budget && l.usage.includes(userChoices.usage));
 
-            // Fallback: If no exact match, just match budget (to prevent errors)
+            // 2. If no exact match, find ANY laptop in that budget
             if (!match) {
-                match = laptops.find(l => l.budget === userChoices.budget) || laptops[0];
+                match = laptops.find(l => l.budget === userChoices.budget);
+            }
+
+            // 3. If still nothing (rare), show the fallback option
+            if (!match) {
+                match = laptops.find(l => l.id === 'fallback');
             }
 
             // Display Data
@@ -242,7 +266,6 @@
             document.getElementById('res-specs').innerText = match.specs;
             document.getElementById('res-link').href = match.link;
             
-            // Update the Checkmarks
             document.getElementById('chk-1').innerText = match.checks[0];
             document.getElementById('chk-2').innerText = match.checks[1];
             document.getElementById('chk-3').innerText = match.checks[2];
