@@ -3,7 +3,7 @@
 Buying a laptop is confusing. **The Laptop Finder** solves this by removing the technical jargon. Instead of asking for "CPU specs" or "RAM type," it asks the user about their **lifestyle** and **budget**, then uses a smart filtering algorithm to recommend the single best machine.
 
 ## 🚀 Live Demo
-**[Insert your live link here]**
+**https://bioclass360-droid.github.io/laptop.html/**
 
 ## ✨ Key Features
 - **Smart Filtering:** Matches user needs (Coding, Gaming, Editing) with budget constraints.
